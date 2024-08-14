@@ -1,4 +1,5 @@
-﻿using NorthWind.Application.Abstractions;
+﻿using Microsoft.EntityFrameworkCore;
+using NorthWind.Application.Abstractions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,9 +16,17 @@ namespace NorthWind.Infrastructure.Respository
             _northWindContext = northWindContext;
         }
 
+        public IEnumerable<Product> CreateProduct(Product product)
+        {
+            _northWindContext.Products.Add(product);
+            _northWindContext.SaveChanges();
+
+            return _northWindContext.Products.Where(x => x.ProductId == product.ProductId);
+        }
+
         public IEnumerable<Product> GetProducts()
         {
-            return _northWindContext.Products;
+            return _northWindContext.Products.Include(x => x.Category).Include(x => x.Supplier);
         }
     }
 }

@@ -1,5 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using NorthWind.Infrastructure;
+using NorthWind.Winforms.Modals;
+using NorthWind.Winforms.Views;
 
 namespace NorthWind.Winforms
 {
@@ -16,6 +18,8 @@ namespace NorthWind.Winforms
             serviceCollection.AddApplicationLayer();
             serviceCollection.AddInfrastructureLayer();
 
+            serviceCollection.AddScoped<ProductUserControl>();
+            serviceCollection.AddScoped<ProductModal>();
             serviceCollection.AddScoped<MainForm>();
 
             ServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();

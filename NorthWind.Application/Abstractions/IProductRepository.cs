@@ -10,5 +10,6 @@ namespace NorthWind.Application.Abstractions
     public interface IProductRepository
     {
         IEnumerable<Product> GetProducts();
+        IEnumerable<Product> CreateProduct(Product product);
     }
 }
