@@ -29,7 +29,19 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ProductUserControl));
-            dataGridView1 = new DataGridView();
+            dataGridView = new DataGridView();
+            ProductId = new DataGridViewTextBoxColumn();
+            ProductName = new DataGridViewTextBoxColumn();
+            SupplierName = new DataGridViewTextBoxColumn();
+            CategoryName = new DataGridViewTextBoxColumn();
+            SupplierId = new DataGridViewTextBoxColumn();
+            CategoryId = new DataGridViewTextBoxColumn();
+            QuantityPerUnit = new DataGridViewTextBoxColumn();
+            UnitPrice = new DataGridViewTextBoxColumn();
+            UnitsInStock = new DataGridViewTextBoxColumn();
+            UnitsOnOrder = new DataGridViewTextBoxColumn();
+            ReorderLevel = new DataGridViewTextBoxColumn();
+            Discontinued = new DataGridViewCheckBoxColumn();
             archivoToolStripMenuItem = new ToolStripMenuItem();
             nuevoToolStripMenuItem = new ToolStripMenuItem();
             abrirToolStripMenuItem = new ToolStripMenuItem();
@@ -60,18 +72,98 @@
             toolStripSeparator5 = new ToolStripSeparator();
             acercadeToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1 = new MenuStrip();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
-            // dataGridView1
+            // dataGridView
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(0, 24);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(763, 543);
-            dataGridView1.TabIndex = 1;
+            dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView.Columns.AddRange(new DataGridViewColumn[] { ProductId, ProductName, SupplierName, CategoryName, SupplierId, CategoryId, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued });
+            dataGridView.Dock = DockStyle.Fill;
+            dataGridView.Location = new Point(0, 24);
+            dataGridView.Name = "dataGridView";
+            dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView.Size = new Size(763, 543);
+            dataGridView.TabIndex = 1;
+            // 
+            // ProductId
+            // 
+            ProductId.DataPropertyName = "ProductId";
+            ProductId.HeaderText = "ProductId";
+            ProductId.Name = "ProductId";
+            // 
+            // ProductName
+            // 
+            ProductName.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ProductName.DataPropertyName = "ProductName";
+            ProductName.HeaderText = "ProductName";
+            ProductName.MinimumWidth = 100;
+            ProductName.Name = "ProductName";
+            // 
+            // SupplierName
+            // 
+            SupplierName.DataPropertyName = "SupplierName";
+            SupplierName.HeaderText = "SupplierName";
+            SupplierName.Name = "SupplierName";
+            // 
+            // CategoryName
+            // 
+            CategoryName.DataPropertyName = "CategoryName";
+            CategoryName.HeaderText = "CategoryName";
+            CategoryName.Name = "CategoryName";
+            // 
+            // SupplierId
+            // 
+            SupplierId.DataPropertyName = "SupplierId";
+            SupplierId.HeaderText = "SupplierId";
+            SupplierId.Name = "SupplierId";
+            SupplierId.Visible = false;
+            // 
+            // CategoryId
+            // 
+            CategoryId.DataPropertyName = "CategoryId";
+            CategoryId.HeaderText = "CategoryId";
+            CategoryId.Name = "CategoryId";
+            CategoryId.Visible = false;
+            // 
+            // QuantityPerUnit
+            // 
+            QuantityPerUnit.DataPropertyName = "QuantityPerUnit";
+            QuantityPerUnit.HeaderText = "QuantityPerUnit";
+            QuantityPerUnit.Name = "QuantityPerUnit";
+            // 
+            // UnitPrice
+            // 
+            UnitPrice.DataPropertyName = "UnitPrice";
+            UnitPrice.HeaderText = "UnitPrice";
+            UnitPrice.Name = "UnitPrice";
+            // 
+            // UnitsInStock
+            // 
+            UnitsInStock.DataPropertyName = "UnitsInStock";
+            UnitsInStock.HeaderText = "UnitsInStock";
+            UnitsInStock.Name = "UnitsInStock";
+            // 
+            // UnitsOnOrder
+            // 
+            UnitsOnOrder.DataPropertyName = "UnitsOnOrder";
+            UnitsOnOrder.HeaderText = "UnitsOnOrder";
+            UnitsOnOrder.Name = "UnitsOnOrder";
+            // 
+            // ReorderLevel
+            // 
+            ReorderLevel.DataPropertyName = "ReorderLevel";
+            ReorderLevel.HeaderText = "ReorderLevel";
+            ReorderLevel.Name = "ReorderLevel";
+            // 
+            // Discontinued
+            // 
+            Discontinued.DataPropertyName = "Discontinued";
+            Discontinued.HeaderText = "Discontinued";
+            Discontinued.Name = "Discontinued";
+            Discontinued.Resizable = DataGridViewTriState.True;
+            Discontinued.SortMode = DataGridViewColumnSortMode.Automatic;
             // 
             // archivoToolStripMenuItem
             // 
@@ -95,9 +187,10 @@
             abrirToolStripMenuItem.Image = (Image)resources.GetObject("abrirToolStripMenuItem.Image");
             abrirToolStripMenuItem.ImageTransparentColor = Color.Magenta;
             abrirToolStripMenuItem.Name = "abrirToolStripMenuItem";
-            abrirToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.O;
+            abrirToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.E;
             abrirToolStripMenuItem.Size = new Size(206, 22);
-            abrirToolStripMenuItem.Text = "&Abrir";
+            abrirToolStripMenuItem.Text = "&Editar";
+            abrirToolStripMenuItem.Click += abrirToolStripMenuItem_Click;
             // 
             // toolStripSeparator
             // 
@@ -163,20 +256,20 @@
             // 
             deshacerToolStripMenuItem.Name = "deshacerToolStripMenuItem";
             deshacerToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Z;
-            deshacerToolStripMenuItem.Size = new Size(163, 22);
+            deshacerToolStripMenuItem.Size = new Size(180, 22);
             deshacerToolStripMenuItem.Text = "&Deshacer";
             // 
             // rehacerToolStripMenuItem
             // 
             rehacerToolStripMenuItem.Name = "rehacerToolStripMenuItem";
             rehacerToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Y;
-            rehacerToolStripMenuItem.Size = new Size(163, 22);
+            rehacerToolStripMenuItem.Size = new Size(180, 22);
             rehacerToolStripMenuItem.Text = "&Rehacer";
             // 
             // toolStripSeparator3
             // 
             toolStripSeparator3.Name = "toolStripSeparator3";
-            toolStripSeparator3.Size = new Size(160, 6);
+            toolStripSeparator3.Size = new Size(177, 6);
             // 
             // cortarToolStripMenuItem
             // 
@@ -184,7 +277,7 @@
             cortarToolStripMenuItem.ImageTransparentColor = Color.Magenta;
             cortarToolStripMenuItem.Name = "cortarToolStripMenuItem";
             cortarToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.X;
-            cortarToolStripMenuItem.Size = new Size(163, 22);
+            cortarToolStripMenuItem.Size = new Size(180, 22);
             cortarToolStripMenuItem.Text = "&Cortar";
             // 
             // copiarToolStripMenuItem
@@ -193,7 +286,7 @@
             copiarToolStripMenuItem.ImageTransparentColor = Color.Magenta;
             copiarToolStripMenuItem.Name = "copiarToolStripMenuItem";
             copiarToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.C;
-            copiarToolStripMenuItem.Size = new Size(163, 22);
+            copiarToolStripMenuItem.Size = new Size(180, 22);
             copiarToolStripMenuItem.Text = "&Copiar";
             // 
             // pegarToolStripMenuItem
@@ -202,18 +295,18 @@
             pegarToolStripMenuItem.ImageTransparentColor = Color.Magenta;
             pegarToolStripMenuItem.Name = "pegarToolStripMenuItem";
             pegarToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.V;
-            pegarToolStripMenuItem.Size = new Size(163, 22);
+            pegarToolStripMenuItem.Size = new Size(180, 22);
             pegarToolStripMenuItem.Text = "&Pegar";
             // 
             // toolStripSeparator4
             // 
             toolStripSeparator4.Name = "toolStripSeparator4";
-            toolStripSeparator4.Size = new Size(160, 6);
+            toolStripSeparator4.Size = new Size(177, 6);
             // 
             // seleccionartodoToolStripMenuItem
             // 
             seleccionartodoToolStripMenuItem.Name = "seleccionartodoToolStripMenuItem";
-            seleccionartodoToolStripMenuItem.Size = new Size(163, 22);
+            seleccionartodoToolStripMenuItem.Size = new Size(180, 22);
             seleccionartodoToolStripMenuItem.Text = "&Seleccionar todo";
             // 
             // herramientasToolStripMenuItem
@@ -284,12 +377,12 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(dataGridView1);
+            Controls.Add(dataGridView);
             Controls.Add(menuStrip1);
             Name = "ProductUserControl";
             Size = new Size(763, 567);
             Load += ProductUserControl_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);
@@ -297,7 +390,7 @@
         }
 
         #endregion
-        private DataGridView dataGridView1;
+        private DataGridView dataGridView;
         private ToolStripMenuItem archivoToolStripMenuItem;
         private ToolStripMenuItem nuevoToolStripMenuItem;
         private ToolStripMenuItem abrirToolStripMenuItem;
@@ -328,5 +421,17 @@
         private ToolStripSeparator toolStripSeparator5;
         private ToolStripMenuItem acercadeToolStripMenuItem;
         private MenuStrip menuStrip1;
+        private DataGridViewTextBoxColumn ProductId;
+        private DataGridViewTextBoxColumn ProductName;
+        private DataGridViewTextBoxColumn SupplierName;
+        private DataGridViewTextBoxColumn CategoryName;
+        private DataGridViewTextBoxColumn SupplierId;
+        private DataGridViewTextBoxColumn CategoryId;
+        private DataGridViewTextBoxColumn QuantityPerUnit;
+        private DataGridViewTextBoxColumn UnitPrice;
+        private DataGridViewTextBoxColumn UnitsInStock;
+        private DataGridViewTextBoxColumn UnitsOnOrder;
+        private DataGridViewTextBoxColumn ReorderLevel;
+        private DataGridViewCheckBoxColumn Discontinued;
     }
 }

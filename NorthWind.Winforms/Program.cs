@@ -1,3 +1,4 @@
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NorthWind.Infrastructure;
 using NorthWind.Winforms.Modals;
@@ -13,7 +14,13 @@ namespace NorthWind.Winforms
         [STAThread]
         static void Main()
         {
+            IConfiguration configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
+
             ServiceCollection serviceCollection = new ServiceCollection();
+
+            serviceCollection.AddSingleton<IConfiguration>(configuration);
 
             serviceCollection.AddApplicationLayer();
             serviceCollection.AddInfrastructureLayer();

@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using NorthWind.Application.ViewModels;
 using NorthWind.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NorthWind.Application.Validators
 {
-    public class ProductValidator: AbstractValidator<Product>
+    public class ProductValidator: AbstractValidator<ProductViewModel>
     {
         public ProductValidator() {
             RuleFor(a => a.ProductName).NotNull();

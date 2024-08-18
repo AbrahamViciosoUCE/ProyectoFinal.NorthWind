@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace NorthWind.Application.Abstractions
 {
-    public interface IProductRepository
+    public interface ICategoryRepository
     {
-        IEnumerable<Product> GetProducts();
-        IEnumerable<Product> CreateProduct(Product product);
-        IEnumerable<Product> EditProduct(Product product);
+        IEnumerable<Category> GetCategories();
+        IEnumerable<Category> CreateCategory(Category category);
     }
 }

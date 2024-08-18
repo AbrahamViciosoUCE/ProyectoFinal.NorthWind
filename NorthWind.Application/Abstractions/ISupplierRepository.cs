@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace NorthWind.Application.Abstractions
 {
-    public interface IProductRepository
+    public interface ISupplierRepository
     {
-        IEnumerable<Product> GetProducts();
-        IEnumerable<Product> CreateProduct(Product product);
-        IEnumerable<Product> EditProduct(Product product);
+        IEnumerable<Supplier> GetSuppliers();
     }
 }

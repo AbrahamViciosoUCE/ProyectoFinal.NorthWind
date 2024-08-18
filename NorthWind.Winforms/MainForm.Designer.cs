@@ -45,6 +45,7 @@
             // productToolStripMenuItem
             // 
             productToolStripMenuItem.Name = "productToolStripMenuItem";
+            productToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.P;
             productToolStripMenuItem.Size = new Size(61, 20);
             productToolStripMenuItem.Text = "Product";
             productToolStripMenuItem.Click += productToolStripMenuItem_Click;

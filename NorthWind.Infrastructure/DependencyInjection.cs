@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using NorthWind.Application.Abstractions;
+using NorthWind.Infrastructure.Repository;
 using NorthWind.Infrastructure.Respository;
 using System;
 using System.Collections.Generic;
@@ -16,10 +17,15 @@ namespace NorthWind.Infrastructure
         public static ServiceCollection AddInfrastructureLayer(this ServiceCollection services)
         {
             services.AddScoped<IProductRepository,ProductRepository>();
+            services.AddScoped<ISupplierRepository,SupplierRepository>();
+            services.AddScoped<ICategoryRepository,CategoryRepository>();
 
-            services.AddDbContext<NorthWindContext>(options => {
-                options.UseSqlServer("Data Source=localhost;Initial Catalog=NorthWind;Integrated Security=True;Trust Server Certificate=True");
-            });
+            services.AddScoped<NorthWindContext>();
+
+            //services.AddDbContext<NorthWindContext>(options =>
+            //{
+            //    options.UseSqlServer("Data Source=localhost;Initial Catalog=NorthWind;Integrated Security=True;Trust Server Certificate=True");
+            //});
 
             return services;
         }

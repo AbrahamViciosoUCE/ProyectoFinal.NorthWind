@@ -1,4 +1,5 @@
-﻿using NorthWind.Application.ProductService;
+﻿using NorthWind.Application.Services.ProductService;
+using NorthWind.Application.ViewModels;
 using NorthWind.Winforms.Modals;
 using System;
 using System.Collections.Generic;
@@ -27,15 +28,24 @@ namespace NorthWind.Winforms.Views
             _productModal = productModal;
         }
 
-       
+
         private void nuevoToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            _productModal._productViewModel = new ProductViewModel();
+            _productModal.modalMode = Enums.ModalMode.Create;
             _productModal.ShowDialog();
         }
 
         private void ProductUserControl_Load(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = _productService.GetAllProducts().ToList();
+            dataGridView.DataSource = _productService.GetAllProducts().ToList();
+        }
+
+        private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _productModal._productViewModel = (ProductViewModel)dataGridView.SelectedRows[0].DataBoundItem;
+            _productModal.modalMode = Enums.ModalMode.Edit;
+            _productModal.ShowDialog();
         }
     }
 }
