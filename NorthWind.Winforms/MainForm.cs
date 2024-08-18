@@ -16,10 +16,13 @@ namespace NorthWind.Winforms
     {
         private readonly ProductUserControl _productUserControl;
 
-        public MainForm(ProductUserControl productUserControl)
+        public CategoryUserControl _categoryUserControl { get; }
+
+        public MainForm(ProductUserControl productUserControl, CategoryUserControl categoryUserControl)
         {
             InitializeComponent();
             _productUserControl = productUserControl;
+            _categoryUserControl = categoryUserControl;
         }
 
         private void productToolStripMenuItem_Click(object sender, EventArgs e)
@@ -27,6 +30,14 @@ namespace NorthWind.Winforms
             _productUserControl.Dock = DockStyle.Fill;
             mainPanel.Controls.Clear();
             mainPanel.Controls.Add(_productUserControl);
+
+        }
+
+        private void categoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _categoryUserControl.Dock = DockStyle.Fill;
+            mainPanel.Controls.Clear();
+            mainPanel.Controls.Add(_categoryUserControl);
 
         }
     }

@@ -1,4 +1,6 @@
-﻿using NorthWind.Application.Abstractions;
+﻿using FluentValidation;
+using FluentValidation.Results;
+using NorthWind.Application.Abstractions;
 using NorthWind.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -11,9 +13,30 @@ namespace NorthWind.Application.Services.CategoryService
     public class CategoryService : ICategoryService
     {
         public ICategoryRepository _categoryRepository;
-        public CategoryService(ICategoryRepository categoryRepository)
+        public IValidator<Category> validator;
+        public CategoryService(ICategoryRepository categoryRepository, IValidator<Category> validator)
         {
             _categoryRepository = categoryRepository;
+            this.validator = validator;
+        }
+
+        public void CreateCategory(Category category)
+        {
+            ValidationResult validationResult = validator.Validate(category);
+            if (!validationResult.IsValid)
+            {
+                throw new ValidationException(validationResult.Errors);
+            }
+            _categoryRepository.CreateCategory(category);
+        }
+
+        public IEnumerable<Category> EditCategory(Category category)
+        {
+            ValidationResult validationResult = validator.Validate(category);
+            if (!validationResult.IsValid) {
+                throw new ValidationException(validationResult.Errors);
+            }
+            return _categoryRepository.EditCategory(category);
         }
 
         public IEnumerable<Category> GetAllCategories()

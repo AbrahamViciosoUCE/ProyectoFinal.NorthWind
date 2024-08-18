@@ -31,6 +31,7 @@
             mainPanel = new Panel();
             productToolStripMenuItem = new ToolStripMenuItem();
             menuStrip = new MenuStrip();
+            categoryToolStripMenuItem = new ToolStripMenuItem();
             menuStrip.SuspendLayout();
             SuspendLayout();
             // 
@@ -52,12 +53,20 @@
             // 
             // menuStrip
             // 
-            menuStrip.Items.AddRange(new ToolStripItem[] { productToolStripMenuItem });
+            menuStrip.Items.AddRange(new ToolStripItem[] { productToolStripMenuItem, categoryToolStripMenuItem });
             menuStrip.Location = new Point(0, 0);
             menuStrip.Name = "menuStrip";
             menuStrip.Size = new Size(800, 24);
             menuStrip.TabIndex = 0;
             menuStrip.Text = "menuStrip1";
+            // 
+            // categoryToolStripMenuItem
+            // 
+            categoryToolStripMenuItem.Name = "categoryToolStripMenuItem";
+            categoryToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.G;
+            categoryToolStripMenuItem.Size = new Size(67, 20);
+            categoryToolStripMenuItem.Text = "Category";
+            categoryToolStripMenuItem.Click += categoryToolStripMenuItem_Click;
             // 
             // MainForm
             // 
@@ -80,5 +89,6 @@
         private Panel mainPanel;
         private ToolStripMenuItem productToolStripMenuItem;
         private MenuStrip menuStrip;
+        private ToolStripMenuItem categoryToolStripMenuItem;
     }
 }

@@ -11,5 +11,6 @@ namespace NorthWind.Application.Abstractions
     {
         IEnumerable<Category> GetCategories();
         IEnumerable<Category> CreateCategory(Category category);
+        IEnumerable<Category> EditCategory(Category category);
     }
 }

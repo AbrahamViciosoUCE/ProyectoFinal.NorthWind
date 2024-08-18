@@ -26,7 +26,9 @@ namespace NorthWind.Winforms
             serviceCollection.AddInfrastructureLayer();
 
             serviceCollection.AddScoped<ProductUserControl>();
+            serviceCollection.AddScoped<CategoryUserControl>();
             serviceCollection.AddScoped<ProductModal>();
+            serviceCollection.AddScoped<CategoryModal>();
             serviceCollection.AddScoped<MainForm>();
 
             ServiceProvider serviceProvider = serviceCollection.BuildServiceProvider();
