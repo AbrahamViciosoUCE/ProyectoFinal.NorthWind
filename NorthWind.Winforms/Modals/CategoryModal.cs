@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace NorthWind.Winforms.Modals
 {
@@ -31,6 +33,11 @@ namespace NorthWind.Winforms.Modals
 
         private void acceptButton_Click(object sender, EventArgs e)
         {
+            using (MemoryStream ms = new MemoryStream())
+            {
+                pictureBox1.Image.Save(ms, ImageFormat.Png);
+                _categoryViewModel.Picture = ms.ToArray();
+            }
             if (modalMode == Enums.ModalMode.Create)
             {
                 _categoryService.CreateCategory(_categoryViewModel);
@@ -39,12 +46,14 @@ namespace NorthWind.Winforms.Modals
             {
                 _categoryService.EditCategory(_categoryViewModel);
             }
+            this.Close();
         }
 
         private void CategoryModal_FormClosed(object sender, FormClosedEventArgs e)
         {
             modalMode = Enums.ModalMode.Edit;
             _categoryViewModel = new Category();
+            categorybindingSource.Clear();
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
@@ -52,14 +61,17 @@ namespace NorthWind.Winforms.Modals
             this.Close();
         }
 
-        private void convertArrayToImage(byte[] bytes)
-        {
-            pictureBox1.Image = Image.FromStream(new MemoryStream(bytes));
-        }
-
         private void categorybindingSource_BindingComplete(object sender, BindingCompleteEventArgs e)
         {
-            convertArrayToImage(_categoryViewModel.Picture);
+        }
+
+        private void loadButton_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                pictureBox1.Image = Image.FromFile(dialog.FileName);
+            }
         }
     }
 }

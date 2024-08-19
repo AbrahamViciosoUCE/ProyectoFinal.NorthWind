@@ -38,6 +38,7 @@
             acceptButton = new Button();
             cancelButton = new Button();
             label3 = new Label();
+            loadButton = new Button();
             ((System.ComponentModel.ISupportInitialize)categorybindingSource).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
@@ -63,15 +64,15 @@
             // categorybindingSource
             // 
             categorybindingSource.DataSource = typeof(Infrastructure.Category);
-            categorybindingSource.BindingComplete += categorybindingSource_BindingComplete;
             // 
             // textBox2
             // 
             textBox2.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Right;
             textBox2.DataBindings.Add(new Binding("Text", categorybindingSource, "Description", true));
             textBox2.Location = new Point(12, 108);
+            textBox2.Multiline = true;
             textBox2.Name = "textBox2";
-            textBox2.Size = new Size(280, 23);
+            textBox2.Size = new Size(280, 119);
             textBox2.TabIndex = 3;
             // 
             // label2
@@ -85,6 +86,7 @@
             // 
             // pictureBox1
             // 
+            pictureBox1.DataBindings.Add(new Binding("Image", categorybindingSource, "Picture", true));
             pictureBox1.Location = new Point(43, 263);
             pictureBox1.Name = "pictureBox1";
             pictureBox1.Size = new Size(211, 209);
@@ -121,11 +123,22 @@
             label3.TabIndex = 7;
             label3.Text = "Image";
             // 
+            // loadButton
+            // 
+            loadButton.Location = new Point(43, 478);
+            loadButton.Name = "loadButton";
+            loadButton.Size = new Size(211, 23);
+            loadButton.TabIndex = 8;
+            loadButton.Text = "Load";
+            loadButton.UseVisualStyleBackColor = true;
+            loadButton.Click += loadButton_Click;
+            // 
             // CategoryModal
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(304, 577);
+            Controls.Add(loadButton);
             Controls.Add(label3);
             Controls.Add(cancelButton);
             Controls.Add(acceptButton);
@@ -155,5 +168,6 @@
         private Button cancelButton;
         private Label label3;
         private BindingSource categorybindingSource;
+        private Button loadButton;
     }
 }

@@ -70,6 +70,8 @@ namespace NorthWind.Winforms.Modals
             {
                 _productService.EditProduct(_productViewModel);
             }
+            this.Close();
+
         }
     }
 }

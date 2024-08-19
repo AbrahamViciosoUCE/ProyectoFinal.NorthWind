@@ -15,6 +15,20 @@ namespace NorthWind.Infrastructure.Repository
             _northWindContext = northWindContext;
         }
 
+        public IEnumerable<Supplier> CreateSupplier(Supplier supplier)
+        {
+            _northWindContext.Suppliers.Add(supplier);
+            _northWindContext.SaveChanges();
+            return _northWindContext.Suppliers.Where(x => supplier.SupplierId == x.SupplierId);
+        }
+
+        public IEnumerable<Supplier> EditSupplier(Supplier supplier)
+        {
+            _northWindContext.Suppliers.Update(supplier);
+            _northWindContext.SaveChanges();
+            return _northWindContext.Suppliers.Where(x => supplier.SupplierId == x.SupplierId);
+        }
+
         public IEnumerable<Supplier> GetSuppliers()
         {
             return _northWindContext.Suppliers;

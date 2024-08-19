@@ -1,6 +1,6 @@
 ﻿namespace NorthWind.Winforms.Views
 {
-    partial class CategoryUserControl
+    partial class SupplierUserControl
     {
         /// <summary> 
         /// Variable del diseñador necesaria.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CategoryUserControl));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SupplierUserControl));
             menuStrip1 = new MenuStrip();
             archivoToolStripMenuItem = new ToolStripMenuItem();
             nuevoToolStripMenuItem = new ToolStripMenuItem();
@@ -41,14 +41,9 @@
             vistapreviadeimpresiónToolStripMenuItem = new ToolStripMenuItem();
             toolStripSeparator2 = new ToolStripSeparator();
             salirToolStripMenuItem = new ToolStripMenuItem();
-            dataGridView = new DataGridView();
-            CategoryId = new DataGridViewTextBoxColumn();
-            Products = new DataGridViewTextBoxColumn();
-            CategoryName = new DataGridViewTextBoxColumn();
-            Description = new DataGridViewTextBoxColumn();
-            Picture = new DataGridViewImageColumn();
+            dataGridView1 = new DataGridView();
             menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             SuspendLayout();
             // 
             // menuStrip1
@@ -56,7 +51,7 @@
             menuStrip1.Items.AddRange(new ToolStripItem[] { archivoToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(615, 24);
+            menuStrip1.Size = new Size(742, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -117,6 +112,7 @@
             imprimirToolStripMenuItem.Image = (Image)resources.GetObject("imprimirToolStripMenuItem.Image");
             imprimirToolStripMenuItem.ImageTransparentColor = Color.Magenta;
             imprimirToolStripMenuItem.Name = "imprimirToolStripMenuItem";
+            imprimirToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.P;
             imprimirToolStripMenuItem.Size = new Size(206, 22);
             imprimirToolStripMenuItem.Text = "&Imprimir";
             // 
@@ -139,66 +135,28 @@
             salirToolStripMenuItem.Size = new Size(206, 22);
             salirToolStripMenuItem.Text = "&Salir";
             // 
-            // dataGridView
+            // dataGridView1
             // 
-            dataGridView.AllowDrop = true;
-            dataGridView.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView.Columns.AddRange(new DataGridViewColumn[] { CategoryId, Products, CategoryName, Description, Picture });
-            dataGridView.Dock = DockStyle.Fill;
-            dataGridView.Location = new Point(0, 24);
-            dataGridView.Name = "dataGridView";
-            dataGridView.RowTemplate.Height = 200;
-            dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView.Size = new Size(615, 479);
-            dataGridView.TabIndex = 1;
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Dock = DockStyle.Fill;
+            dataGridView1.Location = new Point(0, 24);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridView1.Size = new Size(742, 476);
+            dataGridView1.TabIndex = 1;
             // 
-            // CategoryId
-            // 
-            CategoryId.DataPropertyName = "CategoryId";
-            CategoryId.HeaderText = "CategoryId";
-            CategoryId.Name = "CategoryId";
-            // 
-            // Products
-            // 
-            Products.DataPropertyName = "Products";
-            Products.HeaderText = "Products";
-            Products.Name = "Products";
-            Products.Visible = false;
-            // 
-            // CategoryName
-            // 
-            CategoryName.DataPropertyName = "CategoryName";
-            CategoryName.HeaderText = "CategoryName";
-            CategoryName.Name = "CategoryName";
-            // 
-            // Description
-            // 
-            Description.DataPropertyName = "Description";
-            Description.HeaderText = "Description";
-            Description.Name = "Description";
-            // 
-            // Picture
-            // 
-            Picture.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Picture.DataPropertyName = "Picture";
-            Picture.HeaderText = "Picture";
-            Picture.ImageLayout = DataGridViewImageCellLayout.Zoom;
-            Picture.Name = "Picture";
-            Picture.Resizable = DataGridViewTriState.True;
-            Picture.SortMode = DataGridViewColumnSortMode.Automatic;
-            // 
-            // CategoryUserControl
+            // SupplierUserControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Controls.Add(dataGridView);
+            Controls.Add(dataGridView1);
             Controls.Add(menuStrip1);
-            Name = "CategoryUserControl";
-            Size = new Size(615, 503);
-            Load += CategoryUserControl_Load;
+            Name = "SupplierUserControl";
+            Size = new Size(742, 500);
+            Load += SupplierUserControl_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -217,11 +175,6 @@
         private ToolStripMenuItem vistapreviadeimpresiónToolStripMenuItem;
         private ToolStripSeparator toolStripSeparator2;
         private ToolStripMenuItem salirToolStripMenuItem;
-        private DataGridView dataGridView;
-        private DataGridViewTextBoxColumn CategoryId;
-        private DataGridViewTextBoxColumn Products;
-        private DataGridViewTextBoxColumn CategoryName;
-        private DataGridViewTextBoxColumn Description;
-        private DataGridViewImageColumn Picture;
+        private DataGridView dataGridView1;
     }
 }

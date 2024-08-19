@@ -10,5 +10,7 @@ namespace NorthWind.Application.Abstractions
     public interface ISupplierRepository
     {
         IEnumerable<Supplier> GetSuppliers();
+        IEnumerable<Supplier> CreateSupplier(Supplier supplier);
+        IEnumerable<Supplier> EditSupplier(Supplier supplier);
     }
 }
