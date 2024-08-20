@@ -66,8 +66,9 @@
             dataGridView.Location = new Point(0, 24);
             dataGridView.Name = "dataGridView";
             dataGridView.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridView.Size = new Size(763, 543);
+            dataGridView.Size = new Size(1323, 543);
             dataGridView.TabIndex = 1;
+            dataGridView.CellContentClick += dataGridView_CellContentClick;
             // 
             // ProductId
             // 
@@ -224,15 +225,17 @@
             // salirToolStripMenuItem
             // 
             salirToolStripMenuItem.Name = "salirToolStripMenuItem";
+            salirToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Delete;
             salirToolStripMenuItem.Size = new Size(206, 22);
-            salirToolStripMenuItem.Text = "&Salir";
+            salirToolStripMenuItem.Text = "&Delete";
+            salirToolStripMenuItem.Click += salirToolStripMenuItem_Click;
             // 
             // menuStrip1
             // 
             menuStrip1.Items.AddRange(new ToolStripItem[] { archivoToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(763, 24);
+            menuStrip1.Size = new Size(1323, 24);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
             // 
@@ -243,7 +246,7 @@
             Controls.Add(dataGridView);
             Controls.Add(menuStrip1);
             Name = "ProductUserControl";
-            Size = new Size(763, 567);
+            Size = new Size(1323, 567);
             Load += ProductUserControl_Load;
             ((System.ComponentModel.ISupportInitialize)dataGridView).EndInit();
             menuStrip1.ResumeLayout(false);

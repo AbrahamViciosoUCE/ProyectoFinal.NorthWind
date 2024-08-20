@@ -24,6 +24,7 @@ namespace NorthWind.Infrastructure
             services.AddScoped<ICategoryService, CategoryService>();
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+
             return services;
         }
     }

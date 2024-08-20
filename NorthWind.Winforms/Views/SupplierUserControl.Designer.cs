@@ -132,8 +132,10 @@
             // salirToolStripMenuItem
             // 
             salirToolStripMenuItem.Name = "salirToolStripMenuItem";
+            salirToolStripMenuItem.ShortcutKeys = Keys.Control | Keys.Delete;
             salirToolStripMenuItem.Size = new Size(206, 22);
-            salirToolStripMenuItem.Text = "&Salir";
+            salirToolStripMenuItem.Text = "&Delete";
+            salirToolStripMenuItem.Click += salirToolStripMenuItem_Click;
             // 
             // dataGridView1
             // 

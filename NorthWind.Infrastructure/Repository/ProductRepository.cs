@@ -25,6 +25,12 @@ namespace NorthWind.Infrastructure.Respository
             return _northWindContext.Products.Where(x => x.ProductId == product.ProductId);
         }
 
+        public void DeleteProduct(Product product)
+        {
+            _northWindContext.Products.Remove(product);
+            _northWindContext.SaveChanges();
+        }
+
         public IEnumerable<Product> EditProduct(Product product)
         {
             _northWindContext.Products.Update(product);
@@ -36,7 +42,10 @@ namespace NorthWind.Infrastructure.Respository
 
         public IEnumerable<Product> GetProducts()
         {
-            return _northWindContext.Products.Include(x => x.Category).Include(x => x.Supplier).AsNoTracking();
+            return _northWindContext.Products
+                .Include(x => x.Category)
+                .Include(x => x.Supplier)
+                .AsNoTracking();
         }
     }
 }

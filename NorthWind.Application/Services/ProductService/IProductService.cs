@@ -6,7 +6,8 @@ namespace NorthWind.Application.Services.ProductService
     public interface IProductService
     {
         IEnumerable<ProductViewModel> GetAllProducts();
-        void CreateProduct(ProductViewModel product);
-        IEnumerable<Product> EditProduct(ProductViewModel product);
+        IEnumerable<ProductViewModel> CreateProduct(ProductViewModel product);
+        IEnumerable<ProductViewModel> EditProduct(ProductViewModel product);
+        void DeleteProduct(ProductViewModel product);
     }
 }

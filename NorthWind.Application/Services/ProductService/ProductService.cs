@@ -22,43 +22,29 @@ namespace NorthWind.Application.Services.ProductService
             _validator = validator;
         }
 
-        public void CreateProduct(ProductViewModel product)
+        public IEnumerable<ProductViewModel> CreateProduct(ProductViewModel product)
         {
             ValidationResult validationResult = _validator.Validate(product);
             if (!validationResult.IsValid)
             {
                 throw new ValidationException(validationResult.Errors);
             }
-            _productRepository.CreateProduct(viewModelToProduct(product));
+            return _productRepository.CreateProduct(viewModelToProduct(product)).Select(x => productToViewModel(x));
         }
 
-        public IEnumerable<Product> EditProduct(ProductViewModel product)
+        public IEnumerable<ProductViewModel> EditProduct(ProductViewModel product)
         {
             ValidationResult validationResult = _validator.Validate(product);
             if (!validationResult.IsValid)
             {
                 throw new ValidationException(validationResult.Errors);
             }
-            return _productRepository.EditProduct(viewModelToProduct(product));
+            return _productRepository.EditProduct(viewModelToProduct(product)).Select(x => productToViewModel(x));
         }
 
         public IEnumerable<ProductViewModel> GetAllProducts()
         {
-            return _productRepository.GetProducts().Select(x => new ProductViewModel()
-            {
-                CategoryName = x.Category.CategoryName,
-                ProductName = x.ProductName,
-                SupplierName = x.Supplier.CompanyName,
-                CategoryId = x.CategoryId,
-                Discontinued = x.Discontinued,
-                ProductId = x.ProductId,
-                QuantityPerUnit = x.QuantityPerUnit,
-                ReorderLevel = x.ReorderLevel,
-                SupplierId = x.SupplierId,
-                UnitPrice = x.UnitPrice,
-                UnitsInStock = x.UnitsInStock,
-                UnitsOnOrder = x.UnitsOnOrder
-            });
+            return _productRepository.GetProducts().Select(x => productToViewModel(x));
         }
 
         public Product viewModelToProduct(ProductViewModel productViewModel)
@@ -76,6 +62,30 @@ namespace NorthWind.Application.Services.ProductService
                 UnitsInStock = productViewModel.UnitsInStock,
                 Discontinued = productViewModel.Discontinued,
             };
+        }
+
+        public ProductViewModel productToViewModel(Product product)
+        {
+            return new ProductViewModel()
+            {
+                CategoryName = product.Category is not null? product.Category.CategoryName: "",
+                ProductName = product.ProductName,
+                SupplierName = product.Supplier is not null ? product.Supplier.CompanyName : "",
+                CategoryId = product.CategoryId,
+                Discontinued = product.Discontinued,
+                ProductId = product.ProductId,
+                QuantityPerUnit = product.QuantityPerUnit,
+                ReorderLevel = product.ReorderLevel,
+                SupplierId = product.SupplierId,
+                UnitPrice = product.UnitPrice,
+                UnitsInStock = product.UnitsInStock,
+                UnitsOnOrder = product.UnitsOnOrder
+            };
+        }
+
+        public void DeleteProduct(ProductViewModel product)
+        {
+            _productRepository.DeleteProduct(viewModelToProduct(product));
         }
     }
 }

@@ -12,7 +12,8 @@ namespace NorthWind.Application.Validators
     public class ProductValidator: AbstractValidator<ProductViewModel>
     {
         public ProductValidator() {
-            RuleFor(a => a.ProductName).NotNull();
+            RuleFor(a => a.ProductName).NotNull().MaximumLength(40);
+            RuleFor(a => a.QuantityPerUnit).MaximumLength(20);
         }
     }
 }

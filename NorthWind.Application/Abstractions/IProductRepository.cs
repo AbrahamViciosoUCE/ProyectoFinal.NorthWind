@@ -12,5 +12,6 @@ namespace NorthWind.Application.Abstractions
         IEnumerable<Product> GetProducts();
         IEnumerable<Product> CreateProduct(Product product);
         IEnumerable<Product> EditProduct(Product product);
+        void DeleteProduct(Product product);
     }
 }

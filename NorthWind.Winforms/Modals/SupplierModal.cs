@@ -39,19 +39,37 @@ namespace NorthWind.Winforms.Modals
         {
             if (modalMode == Enums.ModalMode.Create)
             {
-                _supplierService.CreateSupplier(_supplierViewModel);
+                try
+                {
+                   _supplierViewModel = _supplierService.CreateSupplier(_supplierViewModel).First();
+                    DialogResult = DialogResult.OK;
+                }
+                catch(Exception exp)
+                {
+                    MessageBox.Show("Error", exp.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    DialogResult = DialogResult.Cancel;
+                }
             }
             else if (modalMode == Enums.ModalMode.Edit)
             {
-                _supplierService.EditSupplier(_supplierViewModel);
+                try
+                {
+                    _supplierViewModel = _supplierService.EditSupplier(_supplierViewModel).First();
+                    DialogResult = DialogResult.OK;
+                }
+                catch (Exception exp)
+                {
+                    MessageBox.Show("Error", exp.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    DialogResult = DialogResult.Cancel;
+                }
 
             }
+
             this.Close();
         }
 
         private void SupplierModal_FormClosed(object sender, FormClosedEventArgs e)
         {
-            _supplierViewModel = new Supplier();
             supplierBindingSource.Clear();
         }
 

@@ -64,12 +64,34 @@ namespace NorthWind.Winforms.Modals
 
         private void acceptButton_Click(object sender, EventArgs e)
         {
-            if (modalMode == ModalMode.Create) {
-                _productService.CreateProduct(_productViewModel);
-            }else if (modalMode == ModalMode.Edit)
+            if (modalMode == Enums.ModalMode.Create)
             {
-                _productService.EditProduct(_productViewModel);
+                try
+                {
+                    _productViewModel = _productService.CreateProduct(_productViewModel).First();
+                    DialogResult = DialogResult.OK;
+                }
+                catch (Exception exp)
+                {
+                    MessageBox.Show("Error", exp.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    DialogResult = DialogResult.Cancel;
+                }
             }
+            else if (modalMode == Enums.ModalMode.Edit)
+            {
+                try
+                {
+                    _productViewModel = _productService.EditProduct(_productViewModel).First();
+                    DialogResult = DialogResult.OK;
+                }
+                catch (Exception exp)
+                {
+                    MessageBox.Show("Error", exp.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    DialogResult = DialogResult.Cancel;
+                }
+
+            }
+
             this.Close();
 
         }

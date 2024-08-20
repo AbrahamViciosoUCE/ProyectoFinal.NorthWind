@@ -20,14 +20,19 @@ namespace NorthWind.Application.Services.CategoryService
             this.validator = validator;
         }
 
-        public void CreateCategory(Category category)
+        public IEnumerable<Category> CreateCategory(Category category)
         {
             ValidationResult validationResult = validator.Validate(category);
             if (!validationResult.IsValid)
             {
                 throw new ValidationException(validationResult.Errors);
             }
-            _categoryRepository.CreateCategory(category);
+            return _categoryRepository.CreateCategory(category);
+        }
+
+        public void DeleteCategory(Category category)
+        {
+            _categoryRepository.DeleteCategory(category);   
         }
 
         public IEnumerable<Category> EditCategory(Category category)

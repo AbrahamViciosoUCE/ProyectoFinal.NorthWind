@@ -1,4 +1,5 @@
 ﻿using NorthWind.Application.Services.SupplierService;
+using NorthWind.Application.ViewModels;
 using NorthWind.Infrastructure;
 using NorthWind.Winforms.Modals;
 using System;
@@ -16,6 +17,7 @@ namespace NorthWind.Winforms.Views
     public partial class SupplierUserControl : UserControl
     {
         private readonly ISupplierService _supplierService;
+        private BindingList<Supplier> _supplierBindingList;
 
         public SupplierModal _supplierModal { get; }
 
@@ -28,20 +30,44 @@ namespace NorthWind.Winforms.Views
 
         private void SupplierUserControl_Load(object sender, EventArgs e)
         {
-            dataGridView1.DataSource = _supplierService.GetAllSuppliers().ToList();
+            _supplierBindingList = new BindingList<Supplier>(_supplierService.GetAllSuppliers().ToList());
+            dataGridView1.DataSource = _supplierBindingList;
         }
 
         private void nuevoToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _supplierModal.ShowDialog();
+            if (_supplierModal.ShowDialog() == DialogResult.OK)
+            {
+                _supplierBindingList.Add(_supplierModal._supplierViewModel);
+            }
         }
 
         private void abrirToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _supplierModal.modalMode = Enums.ModalMode.Edit;
-            _supplierModal._supplierViewModel = (Supplier)dataGridView1.SelectedRows[0].DataBoundItem;
-            _supplierModal.ShowDialog();
-            
+            Supplier supplierSelected = (Supplier)dataGridView1.SelectedRows[0].DataBoundItem;
+            _supplierModal._supplierViewModel = supplierSelected;
+            if (_supplierModal.ShowDialog() == DialogResult.OK)
+            {
+                _supplierBindingList.ResetItem(dataGridView1.SelectedRows[0].Index);
+            }
+
+        }
+
+        private void salirToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("You want delete this record?", "Warning", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                try
+                {
+                    _supplierService.DeleteSupplier((Supplier)dataGridView1.SelectedRows[0].DataBoundItem);
+                    _supplierBindingList.Remove((Supplier)dataGridView1.SelectedRows[0].DataBoundItem);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error this element is indelible", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }

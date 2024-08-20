@@ -1,4 +1,5 @@
 ﻿using NorthWind.Application.Services.CategoryService;
+using NorthWind.Application.ViewModels;
 using NorthWind.Infrastructure;
 using System;
 using System.Collections.Generic;
@@ -38,13 +39,33 @@ namespace NorthWind.Winforms.Modals
                 pictureBox1.Image.Save(ms, ImageFormat.Png);
                 _categoryViewModel.Picture = ms.ToArray();
             }
+
             if (modalMode == Enums.ModalMode.Create)
             {
-                _categoryService.CreateCategory(_categoryViewModel);
+                try
+                {
+                    _categoryViewModel = _categoryService.CreateCategory(_categoryViewModel).First();
+                    DialogResult = DialogResult.OK;
+                }
+                catch (Exception exp)
+                {
+                    MessageBox.Show("Error", exp.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    DialogResult = DialogResult.Cancel;
+                }
             }
             else if (modalMode == Enums.ModalMode.Edit)
             {
-                _categoryService.EditCategory(_categoryViewModel);
+                try
+                {
+                    _categoryViewModel = _categoryService.EditCategory(_categoryViewModel).First();
+                    DialogResult = DialogResult.OK;
+                }
+                catch (Exception exp)
+                {
+                    MessageBox.Show("Error", exp.Message, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    DialogResult = DialogResult.Cancel;
+                }
+
             }
             this.Close();
         }
@@ -52,7 +73,6 @@ namespace NorthWind.Winforms.Modals
         private void CategoryModal_FormClosed(object sender, FormClosedEventArgs e)
         {
             modalMode = Enums.ModalMode.Edit;
-            _categoryViewModel = new Category();
             categorybindingSource.Clear();
         }
 

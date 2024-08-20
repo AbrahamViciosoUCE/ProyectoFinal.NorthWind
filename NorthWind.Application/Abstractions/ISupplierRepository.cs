@@ -12,5 +12,6 @@ namespace NorthWind.Application.Abstractions
         IEnumerable<Supplier> GetSuppliers();
         IEnumerable<Supplier> CreateSupplier(Supplier supplier);
         IEnumerable<Supplier> EditSupplier(Supplier supplier);
+        void DeleteSupplier(Supplier supplier);
     }
 }

@@ -49,5 +49,9 @@ namespace NorthWind.Application.Services.SupplierService
             return _supplierRepository.GetSuppliers();
         }
 
+        public void DeleteSupplier(Supplier supplier)
+        {
+            _supplierRepository.DeleteSupplier(supplier);
+        }
     }
 }

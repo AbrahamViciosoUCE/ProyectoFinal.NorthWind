@@ -10,6 +10,8 @@ namespace NorthWind.Application.Validators
 {
     public class CategoryValidator: AbstractValidator<Category>
     {
-        public CategoryValidator() { }
+        public CategoryValidator() {
+            RuleFor(a => a.CategoryName).MaximumLength(15).NotNull();
+        }
     }
 }

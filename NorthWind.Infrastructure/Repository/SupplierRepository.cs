@@ -22,6 +22,12 @@ namespace NorthWind.Infrastructure.Repository
             return _northWindContext.Suppliers.Where(x => supplier.SupplierId == x.SupplierId);
         }
 
+        public void DeleteSupplier(Supplier supplier)
+        {
+            _northWindContext.Suppliers.Remove(supplier);
+            _northWindContext.SaveChanges();
+        }
+
         public IEnumerable<Supplier> EditSupplier(Supplier supplier)
         {
             _northWindContext.Suppliers.Update(supplier);

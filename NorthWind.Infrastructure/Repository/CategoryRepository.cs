@@ -26,7 +26,7 @@ namespace NorthWind.Infrastructure.Repository
         {
             _northWindContext.Categories.Add(category);
             _northWindContext.SaveChanges();
-            return _northWindContext.Categories;
+            return _northWindContext.Categories.Where(x => x.CategoryId == category.CategoryId);
         }
 
         public IEnumerable<Category> EditCategory(Category category)
@@ -34,6 +34,12 @@ namespace NorthWind.Infrastructure.Repository
             _northWindContext.Categories.Update(category);
             _northWindContext.SaveChanges();
             return _northWindContext.Categories.Where(x => x.CategoryId == category.CategoryId);
+        }
+
+        public void DeleteCategory(Category category)
+        {
+            _northWindContext.Remove(category);
+            _northWindContext.SaveChanges();
         }
     }
 }

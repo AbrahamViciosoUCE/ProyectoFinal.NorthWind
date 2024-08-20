@@ -7,5 +7,6 @@ namespace NorthWind.Application.Services.SupplierService
         IEnumerable<Supplier> GetAllSuppliers();
         IEnumerable<Supplier> EditSupplier(Supplier supplier);
         IEnumerable<Supplier> CreateSupplier(Supplier supplier);
+        void DeleteSupplier(Supplier supplier);
     }
 }
